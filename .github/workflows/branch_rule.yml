@@ -1,0 +1,27 @@
+name: Branch Merge Rules
+
+# mainに向けたプルリクエストが作られた時だけ発動
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch
+        run: |
+          # PRの元ブランチ名を取得
+          SOURCE_BRANCH="${{ github.head_ref }}"
+          
+          echo "Trying to merge from: $SOURCE_BRANCH"
+          
+          # develop 以外からのマージならエラーにして止める
+          if [[ "$SOURCE_BRANCH" != "develop" ]]; then
+            echo "Error: merging to 'main' is only allowed from 'develop'."
+            echo "Please merge your changes into 'develop' first."
+            exit 1
+          fi
+          
+          echo "OK: Source branch is develop."
