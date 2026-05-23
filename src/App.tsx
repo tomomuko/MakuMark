@@ -23,7 +23,7 @@ function App() {
         </div>
         <button
           type="button"
-          className="counter"
+          className="counter shadow-md active:scale-95"
           onClick={() => setCount((count) => count + 1)}
         >
           Count is {count}
