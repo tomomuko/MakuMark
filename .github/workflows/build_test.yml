@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 26
+          node-version-file: .nvmrc # keep CI aligned with repo Node version
 
       - name: Install dependencies
         run: npm ci   # ← clean install（package-lock.json準拠で高速・安全）
